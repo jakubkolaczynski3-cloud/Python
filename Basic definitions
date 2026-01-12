@@ -1,17 +1,15 @@
 
-mathematic = "how to add simple mathematic in Python"
-print(mathematic.title())
+mathematic = "how to add simple mathematic in Python"            #variable
+print(mathematic.title())                                        #show message with big letters
 
-input ("how many is 2+2?")
+input ("how many is 2+2?")                                       # with input you must press enter to continue
 
-print("yes 4")
+print("yes 4")                                                  
 
-Next = "WANNA SEE ANOTHER QUESTION?"
+Next = "WANNA SEE ANOTHER QUESTION?"                             #variable 2
 
-input (Next.title())
+input (Next.title())                                              
 
-print("*\n " * 14 )
+print("*\n " * 14 )                                              # type of multiplication an value , \n do enters and starting from new line
 
-print("Hello World")
-
-input("what you try to find?")
+input("what you try to find?")                              
