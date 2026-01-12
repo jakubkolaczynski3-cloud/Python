@@ -1,1 +1,17 @@
 
+mathematic = "how to add simple mathematic in Python"
+print(mathematic.title())
+
+input ("how many is 2+2?")
+
+print("yes 4")
+
+Next = "WANNA SEE ANOTHER QUESTION?"
+
+input (Next.title())
+
+print("*\n " * 14 )
+
+print("Hello World")
+
+input("what you try to find?")
