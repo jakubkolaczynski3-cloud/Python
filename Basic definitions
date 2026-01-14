@@ -1,18 +1,52 @@
 
-mathematic = "how to add simple mathematic in Python"            #variable
-print(mathematic.title())                                        #show message with big letters
+mathematic = "how to add simple mathematic in Python"            # variable
+print(mathematic.title())                                        # show message with big letters
 
 input ("how many is 2+2?")                                       # with input you must press enter to continue
 
-print("yes 4")                                                  
+number = 2+2                                                     # number is variable with values inside  
 
-Next = "WANNA SEE ANOTHER QUESTION?"                             #variable 2
+print(f"yes {number} !")                                         # showing text and result of variable 
+
+Next = "WANNA SEE NEXT THING ?"                                  # variable 2
 
 input (Next.title())                                              
 
-print("*\n " * 14 )                                              # type of multiplication an value , \n do enters and starting from new line
+print("*\n " * 14 )                                              # type of multiplication an value , \n do enters and starting from new line                          
 
-input("what you try to find?")                              
+number_2 = 4
+
+def print_number():                                              # definition of function name "print_number" 
+    content = number + number_2                                  # cerated local variable content and adding 2 2 variables
+    print(content)                                               # printing result of local variable 
+
+print_number()                                                   # closing function "print_number"
+
+import tkinter as tk                                             # tkinker is Python GUI  / "as tk" is creating shortcut of word tkinker for example you don't need to wrote tkinker.button
+
+window = tk.Tk()                                                 # creat main window
+window.title("Title")                                            # title of Window
+window.geometry("300x200")                                       # size of Window
+
+label = tkinker.Label(window, text="Text")                       # creating area in tkinker(label)  in created window and wrote "Text" as text in label
+label.pack(pady=30)                                              # pack layout manager that making label visable pady adding pixels above and bilow 
+
+text_box = tkinker.Text(window, height=1, width=20)              # creating box for text with size 
+text_box.pack()                                                  # pack layout manager that making text_box visable
+
+button = tkinker.Button(window)                                  # creating button in tkinker 
+button.pack(pady=5)
+
+window.mainloop()                                                #run a window
+
+#PY commands
 
 
 python -m ensurepip --default-pip                                #pip installer from network without searching /  pip is package installer for python
+
+#API 
+
+
+py -m pip install flask                                          # installing flask / Flask is a lightweight Python web framework used to build web applications and APIs.
+
+
