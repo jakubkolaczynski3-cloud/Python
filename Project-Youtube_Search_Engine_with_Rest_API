@@ -5,17 +5,17 @@ window = tk.Tk()                                          #start window
 window.title("Youtube Searcher")
 window.geometry("300x200")
 
-label = tk.Label(window, text="What video you want to find?")      #label in Window
+label = tk.Label(window, text = "What video you want to find?")      #label in Window
 label.pack(pady=30)
 
-text_box = tk.Text(window, height=1, width=20)                     #text box
+text_box = tk.Text(window, height = 1, width = 20)                     #text box
 text_box.pack()
 
 def get_text():                                                    # funtion "get_text" from user 
     searcher = text_box.get("1.0", tk.END)
     print(searcher)
 
-button = tk.Button(window, text="Search", command=get_text)        # button 
+button = tk.Button(window, text="Search", command = get_text)        # button 
 button.pack(pady=10)
 
 
