@@ -13,3 +13,6 @@ input (Next.title())
 print("*\n " * 14 )                                              # type of multiplication an value , \n do enters and starting from new line
 
 input("what you try to find?")                              
+
+
+python -m ensurepip --default-pip                                #pip installer from network without searching /  pip is package installer for python
