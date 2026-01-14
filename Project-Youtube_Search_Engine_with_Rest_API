@@ -12,8 +12,8 @@ text_box = tk.Text(window, height=1, width=20)                     #text box
 text_box.pack()
 
 def get_text():                                                    # funtion "get_text" from user 
-    content = text_box.get("1.0", tk.END)
-    print(content)
+    searcher = text_box.get("1.0", tk.END)
+    print(searcher)
 
 button = tk.Button(window, text="Search", command=get_text)        # button 
 button.pack(pady=10)
