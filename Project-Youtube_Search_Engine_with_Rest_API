@@ -1,22 +1,72 @@
-
+#For start you need install "Requests" package to use API command in terminal: python -m pip install --user requests
+# Import tkinter for GUI
 import tkinter as tk
+#import requsts for API
+import requests
 
-window = tk.Tk()                                          #start window
+
+#in this API Key you need to visit ... and generate your own API Key, remember to don't show your private generated API Keys
+API_KEY = 'API_Key' 
+
+#Definition of 
+def search_youtube(API_KEY, max_results=3):              
+    searcher = text_box.get("1.0", tk.END).strip()
+    if not searcher:
+        result_list.config(text="Please enter a search term.")
+        return
+
+# URL to YOUTUBE searcher 
+    Youtube_URL = 'https://www.googleapis.com/youtube/v3/search'
+
+# parameters to search 
+    params_search = {
+        'part': 'snippet',
+        'q': searcher,
+        'maxResults': max_results,
+        'type': 'video',
+        'key': API_KEY
+    }
+# Send GET request to YouTube API with parameters language undarstabele by JSON
+    response_search = requests.get(Youtube_URL, params=params_search)
+    data_search = response_search.json()
+
+
+# Check if 'items' key exists and contains results
+    if 'items' not in data_search or len(data_search['items']) == 0:
+        result_list.insert(tk.END, "No videos found.")
+        return
+    results = []
+
+# Iterate over each video item in the response
+    for item in data_search['items']:
+        title = item['snippet']['title']
+        channel = item['snippet']['channelTitle']
+        results.append(f"Title: {title}\nChannel: {channel}\n")
+
+    result_list.config(text="\n".join(results))
+
+# Create main window
+window = tk.Tk()
 window.title("Youtube Searcher")
 window.geometry("300x200")
 
-label = tk.Label(window, text = "What video you want to find?")      #label in Window
+# Create a label
+label = tk.Label(window, text="What video you want to find?")
 label.pack(pady=30)
 
-text_box = tk.Text(window, height = 1, width = 20)                     #text box
+# Create a text input box
+text_box = tk.Text(window, height=1, width=20)
 text_box.pack()
 
-def get_text():                                                    # funtion "get_text" from user 
-    searcher = text_box.get("1.0", tk.END)
-    print(searcher)
 
-button = tk.Button(window, text="Search", command = get_text)        # button 
+# Create a button
+button = tk.Button(window, text="Search", command=search_youtube)
 button.pack(pady=10)
 
+# result list
+result_list = tk.Listbox(window, text="", justify=tk.LEFT)
+result_list.pack(pady=10, fill='both')
 
-window.mainloop()                                                  # closing window
+# Run the window
+window.mainloop()
+
