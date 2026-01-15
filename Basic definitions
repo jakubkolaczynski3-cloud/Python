@@ -28,14 +28,22 @@ window = tk.Tk()                                                 # creat main wi
 window.title("Title")                                            # title of Window
 window.geometry("300x200")                                       # size of Window
 
-label = tkinker.Label(window, text="Text")                       # creating area in tkinker(label)  in created window and wrote "Text" as text in label
+label = tkinter.Label(window, text="Text")                       # creating area in tkinker(label)  in created window and wrote "Text" as text in label
 label.pack(pady=30)                                              # pack layout manager that making label visable pady adding pixels above and bilow 
 
-text_box = tkinker.Text(window, height=1, width=20)              # creating box for text with size 
+text_box = tkinter.Text(window, height=1, width=20)              # creating box for text with size 
 text_box.pack()                                                  # pack layout manager that making text_box visable
 
 button = tkinker.Button(window)                                  # creating button in tkinker 
 button.pack(pady=5)
+
+list = {                                                         # creating choices on the list with attachment value
+    "Chose 4": "4",
+    "Chose 5)": "5"
+}
+
+boxlist = tkinter.Combobox(window, values = list, state="readonly")    # creating list in tinker
+boxlist.pack(pady=5)
 
 window.mainloop()                                                #run a window
 
