@@ -70,3 +70,4 @@ result_list.pack(pady=10, fill='both')
 # Run the window
 window.mainloop()
 
+
