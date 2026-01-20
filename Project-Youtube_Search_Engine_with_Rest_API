@@ -5,7 +5,7 @@ import requests
 
 
 #in this API Key you need to visit ... and generate your own API Key, remember to don't show your private generated API Keys
-API_KEY = 'AIzaSyBMIwCWJp3x-f4mIwJfq6WxybOAtqhULCc' 
+API_KEY = 'Your_api_kEY' 
 
 #Definition of 
 def search_youtube(API_KEY, max_results=3):              
