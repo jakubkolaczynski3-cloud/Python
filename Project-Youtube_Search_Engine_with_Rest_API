@@ -5,28 +5,31 @@ import requests
 
 
 #in this API Key you need to visit ... and generate your own API Key, remember to don't show your private generated API Keys
-API_KEY = 'Your_API_KEY' 
+API_KEY = 'Your_API_Key' 
+
+#API key you can get on https://console.cloud.google.com
 
 #Definition of 
-def search_youtube(API_KEY, max_results=3):              
+def search_youtube():
     searcher = text_box.get("1.0", tk.END).strip()
     if not searcher:
-        result_list.config(text="Please enter a search term.")
+        result_list.delete(0, tk.END)
+        result_list.insert(tk.END, "Please enter a search term.")
         return
 
-# URL to YOUTUBE searcher 
-    Youtube_URL = 'Your API Key'
+# URL to YOUTUBE searcher table for Tile of video and name of Channel
+    Title_and_channel = 'https://www.googleapis.com/youtube/v3/search'
 
 # parameters to search 
     params_search = {
         'part': 'snippet',
         'q': searcher,
-        'maxResults': max_results,
+        'maxResults': 3,
         'type': 'video',
         'key': API_KEY
     }
-# Send GET request to YouTube API with parameters language undarstabele by JSON
-    response_search = requests.get(Youtube_URL, params=params_search)
+# Send GET request to YouTube API first table with parameters language undarstabele by JSON and data 
+    response_search = requests.get(Title_and_channel, params=params_search)
     data_search = response_search.json()
 
 
@@ -35,20 +38,38 @@ def search_youtube(API_KEY, max_results=3):
         result_list.delete(0, tk.END)
         result_list.insert(tk.END, "No videos found.")
         return
+    
+
+#Create another variable for statistic
+    video_statistics = [item['id']['videoId'] for item in data_search['items']]
+
+# Views are need to get from diffrent table then first one and we must create secound connection
+    videos_views_url = 'https://www.googleapis.com/youtube/v3/videos'
+    params_videos = {
+        'part': 'snippet,statistics',
+        'id': ','.join(video_statistics),
+        'key': API_KEY
+    }
+# Send GET request to YouTube API secound table with parameters language undarstabele by JSON and data 
+    response_videos = requests.get(videos_views_url, params=params_videos)
+    data_videos = response_videos.json()
+
 
 # Iterate over each video item in the response
     result_list.delete(0, tk.END)
-    for item in data_search['items']:
-        title = item['snippet']['title']
-        channel = item['snippet']['channelTitle']
+    for video in data_videos['items']:
+        title = video['snippet']['title']
+        channel = video['snippet']['channelTitle']
+        views = video['statistics'].get('viewCount', 'N/A')
         result_list.insert(tk.END, f"Title: {title}")
         result_list.insert(tk.END, f"Channel: {channel}")
+        result_list.insert(tk.END, f"Views: {views}")
         result_list.insert(tk.END, "")  # blank line for spacing
 
 # Create main window
 window = tk.Tk()
 window.title("Youtube Searcher")
-window.geometry("300x200")
+window.geometry("400x350")
 
 # Create a label
 label = tk.Label(window, text="What video you want to find?")
@@ -64,10 +85,9 @@ button = tk.Button(window, text="Search", command=search_youtube)
 button.pack(pady=10)
 
 # result list
-result_list = tk.Listbox(window, width=60, height=10)
+result_list = tk.Listbox(window, width=60, height=11)
 result_list.pack(pady=10, fill='both')
 
 # Run the window
 window.mainloop()
-
 
