@@ -1,4 +1,3 @@
-#For start you need install "Requests" package to use API command in terminal: python -m pip install --user requests
 # Import tkinter for GUI
 import tkinter as tk
 #import requsts for API
@@ -6,7 +5,7 @@ import requests
 
 
 #in this API Key you need to visit ... and generate your own API Key, remember to don't show your private generated API Keys
-API_KEY = 'API_Key' 
+API_KEY = 'AIzaSyBMIwCWJp3x-f4mIwJfq6WxybOAtqhULCc' 
 
 #Definition of 
 def search_youtube(API_KEY, max_results=3):              
@@ -16,7 +15,7 @@ def search_youtube(API_KEY, max_results=3):
         return
 
 # URL to YOUTUBE searcher 
-    Youtube_URL = 'https://www.googleapis.com/youtube/v3/search'
+    Youtube_URL = 'Your API Key'
 
 # parameters to search 
     params_search = {
@@ -33,17 +32,18 @@ def search_youtube(API_KEY, max_results=3):
 
 # Check if 'items' key exists and contains results
     if 'items' not in data_search or len(data_search['items']) == 0:
+        result_list.delete(0, tk.END)
         result_list.insert(tk.END, "No videos found.")
         return
-    results = []
 
 # Iterate over each video item in the response
+    result_list.delete(0, tk.END)
     for item in data_search['items']:
         title = item['snippet']['title']
         channel = item['snippet']['channelTitle']
-        results.append(f"Title: {title}\nChannel: {channel}\n")
-
-    result_list.config(text="\n".join(results))
+        result_list.insert(tk.END, f"Title: {title}")
+        result_list.insert(tk.END, f"Channel: {channel}")
+        result_list.insert(tk.END, "")  # blank line for spacing
 
 # Create main window
 window = tk.Tk()
@@ -64,7 +64,7 @@ button = tk.Button(window, text="Search", command=search_youtube)
 button.pack(pady=10)
 
 # result list
-result_list = tk.Listbox(window, text="", justify=tk.LEFT)
+result_list = tk.Listbox(window, width=60, height=10)
 result_list.pack(pady=10, fill='both')
 
 # Run the window
